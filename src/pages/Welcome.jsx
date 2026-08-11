@@ -1,14 +1,17 @@
 import { Component } from "react";
 
+import Header from "../components/Header.jsx";
+
 class Welcome extends Component {
   state = {
-    num: 0,
+    num: this.props.start,
   };
   render() {
-    console.log("state num:", this.state.num);
+    // console.log("state num:", this.state.num);
     return (
       <>
-        <h1>Welcome</h1>
+        <Header title="Welcome" />
+        {/* <h1>Welcome</h1> */}
         <button
           onClick={() => {
             this.setState((prevState) => {
@@ -21,6 +24,7 @@ class Welcome extends Component {
         >
           Increase Num
         </button>
+        <p>Number: {this.state.num}</p>
       </>
     );
   }

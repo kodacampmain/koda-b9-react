@@ -1,11 +1,15 @@
 import { useState } from "react";
 
+import Header from "../components/Header.jsx";
+
 function Home() {
   const [username, setUsername] = useState("my username");
-  console.log(username);
+  //   console.log(username);
   return (
     <>
-      <h1>Home</h1>
+      <Header title="Home" />
+      {/* <h1>Home</h1> */}
+      <p>My Name is: {username}</p>
       <form
         onSubmit={(e) => {
           e.preventDefault();
