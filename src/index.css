@@ -1,5 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Germania+One&display=swap");
 @import "tailwindcss";
 
-body {
-  margin: 0;
+@theme {
+  --primary: #762929;
+  --secondary: #94b6e7;
+
+  /* --spacing: 1px; */
+  --color-primary: var(--primary);
+  --color-secondary: #94b6e7;
+  --breakpoint-uw: 2048px;
+}
+
+@layer base {
+  * {
+    font-family: "Germania One", serif;
+  }
+  body {
+    margin: 0;
+    /* background-color: var(--primary); */
+  }
+}
+
+@layer components {
+  .kelas {
+    background-color: red;
+  }
+}
+
+@utility my-border {
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+}
+
+@utility my-border-* {
+  @apply border-2 border-dashed;
+  border-color: --value(--color-*);
+  border-color: --value([color]);
+  @variant focus {
+    outline: none;
+  }
 }
