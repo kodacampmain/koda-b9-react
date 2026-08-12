@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import fetchUrl from "../utils/fetchUrl.js";
 import Header from "../components/Header.jsx";
+import Character from "../components/Character.jsx";
 
 function Fetch() {
   const [data, setData] = useState([]);
@@ -46,11 +47,12 @@ function Fetch() {
           ) : (
             data.map((char) => {
               return (
-                <article key={char.id}>
-                  <img src={char.image} alt={char.name} />
-                  <p className="font-bold">{char.name}</p>
-                  <p>{char.status}</p>
-                </article>
+                <Character
+                  key={char.id}
+                  img={char.image}
+                  name={char.name}
+                  status={char.status}
+                />
               );
             })
           )}

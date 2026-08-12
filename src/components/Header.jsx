@@ -1,5 +1,11 @@
 import { Link, useNavigate } from "react-router";
 
+/**
+ * Header Component with Navigation
+ * @param {Object} props
+ * @param {String} props.title
+ * @returns {JSX.Element}
+ */
 function Header({ title }) {
   const navigate = useNavigate();
   //   const title = props.title;

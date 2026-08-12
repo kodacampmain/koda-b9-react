@@ -45,6 +45,12 @@ function Parent() {
   );
 }
 
+/**
+ * View Component for Hobbies
+ * @param {Object} props
+ * @param {String[]} props.hobbies
+ * @returns
+ */
 function HobbiesView({ hobbies }) {
   const hobbiesList = hobbies.map((hobby, idx) => {
     return (
@@ -69,6 +75,12 @@ function HobbiesView({ hobbies }) {
   );
 }
 
+/**
+ * Add New Hobby Component
+ * @param {Object} props
+ * @param {import("react").Dispatch<import("react").SetStateAction<String[]>>} props.updateHobby
+ * @returns
+ */
 function AddNewHobby({ updateHobby }) {
   return (
     <form
