@@ -3,7 +3,14 @@ import { useState, useEffect } from "react";
 // state lifting
 
 function Parent() {
-  const [hobbies, setHobbies] = useState(["Sleeping"]);
+  const [hobbies, setHobbies] = useState(() => {
+    // mengambil dari localstorage
+    const hobbies = localStorage.getItem("hobbies");
+    if (!hobbies) {
+      return [];
+    }
+    return JSON.parse(hobbies);
+  });
   const [num, setNum] = useState(1);
   useEffect(() => {
     console.log("did mount");
@@ -12,6 +19,10 @@ function Parent() {
   }, []); // no trigger
   useEffect(() => {
     console.log("hobby updated");
+    // update ke localstorage
+    if (hobbies && hobbies.length > 0) {
+      localStorage.setItem("hobbies", JSON.stringify(hobbies));
+    }
   }, [hobbies]); // triggered when hobbies changed/created
   // useEffect(() => {
   //   console.log("num updated");
@@ -64,8 +75,10 @@ function AddNewHobby({ updateHobby }) {
       className="p-4"
       onSubmit={(e) => {
         e.preventDefault();
+        const newHobby = e.target.hobby.value;
         updateHobby((prevState) => {
-          const newHobbies = [...prevState, e.target.hobby.value];
+          const newHobbies = [...prevState, newHobby];
+          e.target.hobby.value = "";
           return newHobbies;
           //   prevState.push(e.target.hobby.value);
           //   return prevState;
@@ -78,7 +91,7 @@ function AddNewHobby({ updateHobby }) {
         type="text"
         name="hobby"
         id="hobby"
-        className="border-2 border-black border-solid rounded-sm"
+        className="border-2 border-black border-solid rounded-sm p-2"
       />
       <button type="submit">Add</button>
     </form>
