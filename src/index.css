@@ -1,5 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Germania+One&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Germania+One&display=swap"); */
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Germania One";
+  src: url("./assets/GermaniaOne-Regular.ttf");
+  font-display: swap;
+}
 
 @theme {
   --primary: #762929;
@@ -9,11 +15,12 @@
   --color-primary: var(--primary);
   --color-secondary: #94b6e7;
   --breakpoint-uw: 2048px;
+  --font-germania: "Germania One", serif;
 }
 
 @layer base {
   * {
-    font-family: "Germania One", serif;
+    @apply font-germania;
   }
   body {
     margin: 0;

@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import Header from "../components/Header.jsx";
+// import Header from "../components/Header.jsx";
 
 class Welcome extends Component {
   state = {
@@ -10,7 +10,7 @@ class Welcome extends Component {
     // console.log("state num:", this.state.num);
     return (
       <>
-        <Header title="Welcome" />
+        {/* <Header title="Welcome" /> */}
         {/* <h1>Welcome</h1> */}
         <button
           onClick={() => {
