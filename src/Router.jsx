@@ -10,6 +10,7 @@ import DataDetail from "./pages/Detail.jsx";
 import Theme from "./pages/Theme.jsx";
 
 import MainLayout from "./layout/MainLayout.jsx";
+import Cart from "./pages/Cart.jsx";
 
 // /app/v1
 function Router() {
@@ -26,6 +27,7 @@ function Router() {
         <Route path="form" element={<Form />} />
         <Route path="hook-form" element={<HookForm />} />
         <Route path="theme" element={<Theme />} />
+        <Route path="cart" element={<Cart />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>

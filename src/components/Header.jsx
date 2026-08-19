@@ -2,6 +2,7 @@ import { useEffect, useContext } from "react";
 import { NavLink, useLocation, Navigate } from "react-router";
 
 import themeContext from "../contexts/theme/themeContext.js";
+import cartContext from "../contexts/cart/cartContext.js";
 
 /**
  * Header Component with Navigation
@@ -30,6 +31,7 @@ const routes = [
 function Header() {
   // const navigate = useNavigate();
   const themeData = useContext(themeContext);
+  const { state } = useContext(cartContext);
   const { pathname } = useLocation();
   const getTitle = () => {
     if (pathname === "/") return;
@@ -56,6 +58,9 @@ function Header() {
       className={`flex justify-between p-1 ${themeData.theme === "light" ? "bg-blue-200 text-black" : "bg-blue-800 text-white"}`}
     >
       <h1 className="flex justify-center items-center">{getTitle()}</h1>
+      <p>
+        Keranjang: {state.cart.length} item{state.cart.length > 1 ? "s" : ""}
+      </p>
       <nav className="flex justify-center items-center">
         <ul className="list-none flex gap-1.5">
           {routes.map((route, idx) => {
