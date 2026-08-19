@@ -1,16 +1,21 @@
 import { useState, useEffect } from "react";
 
+import useLocalStorage from "../hooks/useLocalStorage.js";
+
 // state lifting
 
 function Parent() {
-  const [hobbies, setHobbies] = useState(() => {
-    // mengambil dari localstorage
-    const hobbies = localStorage.getItem("hobbies");
-    if (!hobbies) {
-      return [];
-    }
-    return JSON.parse(hobbies);
-  });
+  // const [hobbies, setHobbies] = useState(() => {
+  //   // mengambil dari localstorage
+  //   const hobbies = localStorage.getItem("hobbies");
+  //   if (!hobbies) {
+  //     return [];
+  //   }
+  //   return JSON.parse(hobbies);
+  // });
+  const [hobbies, setHobbies] = useLocalStorage("hobbies", []);
+  // const hobbies = states[0]
+  // const setHobbies = states[1]
   const [num, setNum] = useState(1);
   useEffect(() => {
     console.log("did mount");
@@ -20,9 +25,9 @@ function Parent() {
   useEffect(() => {
     console.log("hobby updated");
     // update ke localstorage
-    if (hobbies && hobbies.length > 0) {
-      localStorage.setItem("hobbies", JSON.stringify(hobbies));
-    }
+    // if (hobbies && hobbies.length > 0) {
+    //   localStorage.setItem("hobbies", JSON.stringify(hobbies));
+    // }
   }, [hobbies]); // triggered when hobbies changed/created
   // useEffect(() => {
   //   console.log("num updated");
