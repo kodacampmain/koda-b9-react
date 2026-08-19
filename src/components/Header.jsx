@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { NavLink, useLocation, Navigate } from "react-router";
+
+import themeContext from "../contexts/theme/themeContext.js";
 
 /**
  * Header Component with Navigation
@@ -27,10 +29,12 @@ const routes = [
 
 function Header() {
   // const navigate = useNavigate();
+  const themeData = useContext(themeContext);
   const { pathname } = useLocation();
   const getTitle = () => {
     if (pathname === "/") return;
     const route = routes.filter((route) => pathname.includes(route.to));
+    if (route.length === 0) return "Page";
     return route[0].title;
   };
   useEffect(() => {
@@ -39,7 +43,7 @@ function Header() {
     // }
     if (pathname !== "/") {
       const route = routes.filter((route) => pathname.includes(route.to));
-      document.title = `Koda B9 React | ${route[0].title}`;
+      document.title = `Koda B9 React | ${route[0]?.title || "Page"}`;
     }
   }, [pathname]);
   // console.log(pathname);
@@ -48,7 +52,9 @@ function Header() {
     return <Navigate to={"/home"} replace />;
   }
   return (
-    <header className="flex justify-between p-1 bg-blue-300">
+    <header
+      className={`flex justify-between p-1 ${themeData.theme === "light" ? "bg-blue-200 text-black" : "bg-blue-800 text-white"}`}
+    >
       <h1 className="flex justify-center items-center">{getTitle()}</h1>
       <nav className="flex justify-center items-center">
         <ul className="list-none flex gap-1.5">

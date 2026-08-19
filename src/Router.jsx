@@ -7,6 +7,7 @@ import DataFetch from "./pages/Fetch.jsx";
 import Form from "./pages/Form.jsx";
 import HookForm from "./pages/HookForm.jsx";
 import DataDetail from "./pages/Detail.jsx";
+import Theme from "./pages/Theme.jsx";
 
 import MainLayout from "./layout/MainLayout.jsx";
 
@@ -24,6 +25,8 @@ function Router() {
         </Route>
         <Route path="form" element={<Form />} />
         <Route path="hook-form" element={<HookForm />} />
+        <Route path="theme" element={<Theme />} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
