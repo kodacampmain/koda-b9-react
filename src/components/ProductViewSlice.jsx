@@ -1,24 +1,20 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import fetchUrl from "../utils/fetchUrl.js";
+// import fetchUrl from "../utils/fetchUrl.js";
 // import cartContext from "../contexts/cart/cartContext.js";
-import { addToCart } from "../redux/slices/CartSlices.js";
+import { addToCart } from "../redux/slices/cartSlices.js";
+import { getProductThunk } from "../redux/slices/productSlices.js";
 
 function ProductView() {
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
   // const { dispatch } = useContext(cartContext);
   const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.productState);
   useEffect(() => {
-    (async () => {
-      try {
-        const data = await fetchUrl("https://fakestoreapi.com/products");
-        setProducts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+    const url = "https://fakestoreapi.com/products";
+    dispatch(getProductThunk(url));
+  }, [dispatch]);
   return (
     <main className="grid grid-cols-3 gap-2 p-2 overflow-scroll h-screen">
       {products.length > 0 &&

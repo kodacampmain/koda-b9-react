@@ -5,7 +5,7 @@ import {
   clearCart,
   removeFromCart,
   changeCartItem,
-} from "../redux/slices/CartSlices.js";
+} from "../redux/slices/cartSlices.js";
 
 function CartView() {
   // const { state, dispatch } = useContext(cartContext);
