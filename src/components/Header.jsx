@@ -1,5 +1,6 @@
 import { useEffect, useContext } from "react";
 import { NavLink, useLocation, Navigate } from "react-router";
+import { useSelector } from "react-redux";
 
 import themeContext from "../contexts/theme/themeContext.js";
 import cartContext from "../contexts/cart/cartContext.js";
@@ -32,6 +33,7 @@ function Header() {
   // const navigate = useNavigate();
   const themeData = useContext(themeContext);
   const { state } = useContext(cartContext);
+  const kr = useSelector((state) => state.cartState);
   const { pathname } = useLocation();
   const getTitle = () => {
     if (pathname === "/") return;
@@ -59,7 +61,10 @@ function Header() {
     >
       <h1 className="flex justify-center items-center">{getTitle()}</h1>
       <p>
-        Keranjang: {state.cart.length} item{state.cart.length > 1 ? "s" : ""}
+        KC: {state.cart.length} item{state.cart.length > 1 ? "s" : ""}
+      </p>
+      <p>
+        KR: {kr.cart.length} item{kr.cart.length > 1 ? "s" : ""}
       </p>
       <nav className="flex justify-center items-center">
         <ul className="list-none flex gap-1.5">

@@ -8,9 +8,10 @@ import Form from "./pages/Form.jsx";
 import HookForm from "./pages/HookForm.jsx";
 import DataDetail from "./pages/Detail.jsx";
 import Theme from "./pages/Theme.jsx";
+import Cart from "./pages/Cart.jsx";
+import CartSlice from "./pages/CartSlice.jsx";
 
 import MainLayout from "./layout/MainLayout.jsx";
-import Cart from "./pages/Cart.jsx";
 
 // /app/v1
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
         <Route path="hook-form" element={<HookForm />} />
         <Route path="theme" element={<Theme />} />
         <Route path="cart" element={<Cart />} />
+        <Route path="cart-slice" element={<CartSlice />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>

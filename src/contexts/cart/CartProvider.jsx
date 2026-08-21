@@ -1,9 +1,10 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 
 import CartContext from "./cartContext.js";
 
 const initialState = {
   cart: [],
+  hydrated: false,
 };
 
 // cartItem: id, name, price, qty
@@ -15,8 +16,14 @@ function CartProvider({ children }) {
     // payload => data yg dibawa
     // Menambah, Menghapus, Mengubah qty, Membersihkan
 
-    // dispatch({type: "ADD, payload: cartItem})
     switch (action.type) {
+      case "PERSIST":
+        return {
+          ...prevState,
+          cart: action.payload,
+          hydrated: true,
+        };
+      // dispatch({type: "ADD, payload: cartItem})
       case "ADD":
         return (() => {
           let found = false;
@@ -64,6 +71,7 @@ function CartProvider({ children }) {
             return cart;
           }),
         };
+      // dispatch({type: "CLEAR"})
       case "CLEAR":
         return {
           ...prevState,
@@ -75,6 +83,48 @@ function CartProvider({ children }) {
     }
   }, initialState);
 
+  // const [cart, setCart] = useState([]);
+
+  // logika
+  // kalau sudah ada item yg sama di keranjang maka tambahkan qty
+  // kalau belum tambahkan list keranjang
+  // const addToCart = (cartItem) => {
+  //   setCart((prevCart) => {
+  //     let found = false;
+  //     const newCart = [];
+  //     for (let cart of prevCart) {
+  //       if (cartItem.id === cart.id) {
+  //         newCart.push({
+  //           ...cart,
+  //           qty: cart.qty + 1,
+  //         });
+  //         found = true;
+  //         continue;
+  //       }
+  //       newCart.push(cart);
+  //     }
+  //     if (found) return newCart;
+  //     return [...prevCart, cartItem];
+  //   });
+  // };
+  // useEffect(() => {
+  //   console.log("effect 1");
+
+  // }, []);
+
+  useEffect(() => {
+    // console.log("effect 2");
+    (() => {
+      if (!state.hydrated) {
+        const data = localStorage.getItem("cart");
+        if (data) {
+          dispatch({ type: "PERSIST", payload: JSON.parse(data) });
+        }
+        return;
+      }
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+    })();
+  }, [state.cart, state.hydrated]);
   return (
     <CartContext.Provider
       value={{
